@@ -99,7 +99,7 @@ pub fn solve(test_path: &str) -> std::io::Result<()> {
             let moves: Vec<&str> = contents.split_whitespace().collect();
             let game = Game::new(&moves);
             // println!("{:}", game.get_verdict());
-            running_score += game.get_verdict().1;
+            running_score += game.verdict.unwrap().1;
         }
 
     }  
