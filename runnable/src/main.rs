@@ -22,8 +22,8 @@ fn main() {
     // println!("{:}", file_path.to_str().unwrap()); 
     
     if let Ok(_) = day_2::solve(file_path.to_str().unwrap()) {
-        println!("Successfully solved day 1's problem");
+        println!("Successfully solved day 2's problem");
     } else {
-        println!("Failed to solve day 1's problem");
+        println!("Failed to solve day 2's problem");
     }
 }
