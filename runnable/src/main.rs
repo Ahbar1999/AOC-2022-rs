@@ -1,9 +1,13 @@
 use std::io::prelude::*;
 use std::fs::File;
 use std::io::BufReader;
+
 // use std::cmp;
 use std::env;
+use crate::days::day_1;
 
+mod days;
+/*
 mod day_1 {
     use crate::*;
     
@@ -58,6 +62,7 @@ mod day_1 {
 mod day_2 {
 
 }
+*/
 
 fn main() {
     // call day_x with test input
