@@ -11,7 +11,7 @@ mod days;
 fn main() {
     // call day_x with test input
     // build the input file path 
-    let days = vec!["day_1", "day_2",  "day_3"];
+    let days = vec!["day_1", "day_2",  "day_3", "day_4"];
     
     let day = days[2];
     let mut file_path = env::current_dir().unwrap();
