@@ -48,14 +48,14 @@ pub fn solve(test_path: &str) -> std::io::Result<()> {
                     .filter(| s | s != &"")
                     .map(| s | s.parse().unwrap())
                     .collect::<Vec<u32>>();
-                // args.trim().split(" ").map(| s | s.parse().unwrap()).collect();
+                
                 // println!("args: {:?}", args);
-                
+                let mut items = vec![]; 
                 for _ in 0..args[0] {
-                    let item = crate_stacks[args[1] as usize - 1].pop().unwrap();
-                    crate_stacks[args[2] as usize - 1].push(item);             
-                }
-                
+                    items.push(crate_stacks[args[1] as usize - 1].pop().unwrap());
+                } 
+                items.reverse();
+                crate_stacks[args[2] as usize - 1].append(&mut items);               
                 // println!("curr state of stacks: {:?}", crate_stacks);
             } 
         }
@@ -67,4 +67,3 @@ pub fn solve(test_path: &str) -> std::io::Result<()> {
  
     Ok(())
 }
-
