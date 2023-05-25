@@ -1,18 +1,17 @@
 use std::io::prelude::*;
 use std::fs::File;
 use std::io::BufReader;
-
-// use std::cmp;
 use std::env;
-use crate::days::day_6;
+use crate::days::day_7;
 
+#[allow(dead_code)]
 mod days;
 
 fn main() {
     // call day_x with test input
     // build the input file path 
     
-    let day = "day_6";
+    let day = "day_7";
     let mut file_path = env::current_dir().unwrap();
     file_path.push("..");
     file_path.push("test_files");
@@ -20,9 +19,12 @@ fn main() {
     file_path.push("input.txt");
     // println!("{:}", file_path.to_str().unwrap()); 
     
-    if let Ok(_) = day_6::solve(file_path.to_str().unwrap()) {
-        println!("Successfully solved day 6's problem");
+    println!("####################################"); 
+    println!("Answer for: ");
+    
+    if let Ok(_) = day_7::solve(file_path.to_str().unwrap()) {
+        println!("Successfully solved today's problem");
     } else {
-        println!("Failed to solve day 6's problem");
+        println!("Failed to solve day today's problem");
     }
 }

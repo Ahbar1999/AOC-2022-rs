@@ -1,8 +1,6 @@
 use crate::*;
 use std::collections::HashMap;
 
-
-
 fn find_marker_at_n(contents: &str, n: usize) {
     // solution logic         
     let mut last_n: HashMap<char, u32> = HashMap::new();
