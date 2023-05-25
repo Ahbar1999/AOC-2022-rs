@@ -21,13 +21,17 @@ struct Dir {
     size: u32,
 }
 
+const FREE_SPACE_REQUIRED: u32 = 30000000;
+const DISK_SIZE: u32 = 70000000;
+
 pub fn solve(test_path: &str) -> std::io::Result<()> {
     let file = File::open(&test_path)?; 
     
     let file_reader = BufReader::new(file); 
     let lines = file_reader.lines();
-    // stack 
+    // directory stack 
     let mut stack: Vec<Dir> = vec![]; 
+    // record of all the directories with their sizes 
     let mut dirs: Vec<Dir> = Vec::new();
     /*
     let root: Rc<Dir> = Rc::new(Dir{name: "/".to_string(), files: HashMap::new(), parent: None, children: vec![]});
@@ -94,13 +98,14 @@ pub fn solve(test_path: &str) -> std::io::Result<()> {
                 // file description
                 let mut top = stack.last_mut().unwrap();
                 // get the file size
-                let (filesize, filename) = contents.split_once(" ").unwrap();  
+                let (filesize, _) = contents.split_once(" ").unwrap();  
                 top.size += filesize.parse::<u32>().unwrap();
             }
         }
         // println!("{:?}", stack); 
     }
-
+    
+    // clean up remaining directories from the stack
     while !stack.is_empty() {
         let popped = stack.pop().unwrap();
         if !stack.is_empty() {
@@ -109,9 +114,28 @@ pub fn solve(test_path: &str) -> std::io::Result<()> {
         }
         dirs.push(popped);
     }
-
-    println!("day 7 Part 1:{:?}", dirs.iter().filter(| d | d.size < 100000).map(| d | d.size).sum::<u32>()); 
+    
+    dirs.sort_by_key(| k | k.size);
+    // println!("{:?}", dirs);
+    // println!("day 7 Part 1:{:?}", dirs.iter().filter(| d | d.size < 100000).map(| d | d.size).sum::<u32>()); 
+    let total_used_space = dirs.last().unwrap();
+    let space_to_be_freed =  FREE_SPACE_REQUIRED - (DISK_SIZE - total_used_space.size);
+    if !(space_to_be_freed <= 0) {
+        for dir in dirs.iter() {
+            if dir.size >= space_to_be_freed {
+                println!("day 7 Part 2:{:?}", dir.size);
+                break;
+            }  
+        } 
+    } else {
+        println!("day 7 Part 2: {:?}", "There's already enough free space");
+    }
 
     Ok(())
 }
+
+
+
+
+
 
